@@ -11,13 +11,12 @@
 
 struct Network
 {
-    char bssid[20];
+    char ip[20];
     char encryption[5];
     char essid[30];
     int channel;
     float dataTransmissionRate;
     float dataCapacity;
-    char authentication[10];
     char key[25];
     int online;
 };
@@ -101,8 +100,8 @@ void addNetwork()
     {
         system("cls");
 
-        printf("Enter BSSID.\n");
-        scanf("%s",&net.bssid);
+        printf("Enter IP.\n");
+        scanf("%s",&net.ip);
         fflush(stdin);
 
         printf("\nPress : \n\n1. To enter data in GBs. \n2. To enter data in MBs. \n3. To enter data in KBs. \n4. To enter data in Bytes. \n");
@@ -172,10 +171,6 @@ void addNetwork()
         scanf("%s",&net.encryption);
         fflush(stdin);
 
-        printf("Enter authentication type.\n");
-        scanf("%s",&net.authentication);
-        fflush(stdin);
-
         printf("Enter ESSID.\n");
         scanf("%[^\n]",&net.essid);
         fflush(stdin);
@@ -222,12 +217,12 @@ void listNetworks()
     {
         while (fread(&net, sizeof(net), 1, f) == 1)
         {
-            printf("BSSID\t\t\tCH\tENC\tAUTH\tESSID\t\tDataCap\t\tDataRate\n");
+            printf("IP\t\t\tCH\tENC\tAUTH\tESSID\t\tDataCap\t\tDataRate\n");
 
             for (i = 0; i < 99; i++)
                 printf("-");
 
-            printf("\n%s\t%d\t%s\t%s\t%s\t%.1f GB\t%.2f MB/s\n", net.bssid, net.channel, net.encryption, net.authentication, net.essid, net.dataCapacity, net.dataTransmissionRate);
+            printf("\n%s\t%d\t%s\t%s\t%s\t%.1f GB\t%.2f MB/s\n", net.ip, net.channel, net.encryption, net.essid, net.dataCapacity, net.dataTransmissionRate);
             printf("\n\n");
 
             for (i = 0; i < 99; i++)
@@ -246,7 +241,7 @@ void searchNetwork()
 {
     FILE *f;
     struct Network net;
-    char bssid[20];
+    char ip[20];
     int i, flag = 1;
 
     system("cls");
@@ -257,19 +252,19 @@ void searchNetwork()
     }
     else
     {
-        printf("Enter BSSID.\n");
-        scanf("%s",&bssid);
+        printf("Enter IP.\n");
+        scanf("%s",&ip);
 
         while (fread(&net, sizeof(net), 1, f) == 1)
         {
-            if (strcmp(net.bssid, bssid) == 0)
+            if (strcmp(net.ip, ip) == 0)
             {
-                printf("\n\nBSSID\t\t\tCH\tENC\tAUTH\tESSID\t\tDataCap\t\tDataRate\n");
+                printf("\n\nIP\t\t\tCH\tENC\tAUTH\tESSID\t\tDataCap\t\tDataRate\n");
 
                 for (i = 0; i < 99; i++)
                     printf("-");
 
-                printf("\n%s\t%d\t%s\t%s\t%s\t%.1f GB\t%.2f MB/s\n", net.bssid, net.channel, net.encryption, net.authentication, net.essid, net.dataCapacity, net.dataTransmissionRate);
+                printf("\n%s\t%d\t%s\t%s\t%s\t%.1f GB\t%.2f MB/s\n", net.ip, net.channel, net.encryption, net.essid, net.dataCapacity, net.dataTransmissionRate);
                 printf("\n\n");
 
                 for (i = 0; i < 99; i++)
@@ -283,7 +278,7 @@ void searchNetwork()
             else if (flag == 1)
             {
                 system("cls");
-                printf("Unknown or invalid BSSID.\n");
+                printf("Unknown or invalid IP.\n");
             }
 
             printf("\n");
@@ -299,7 +294,7 @@ void manageNetwork()
 {
     FILE *f;
     struct Network net;
-    char bssid[20];
+    char ip[20];
     char key[25];
     char dCap;
     int flag = 1, time;
@@ -313,22 +308,22 @@ void manageNetwork()
     }
     else
     {
-        printf("Enter BSSID.\n");
-        scanf("%[^\n]",&bssid);
+        printf("Enter IP.\n");
+        scanf("%[^\n]",&ip);
 
         printf("Enter key.\n");
         scanf("%s",&key);
 
         while (fread(&net, sizeof(net), 1, f) == 1)
         {
-            if (strcmp(net.bssid, bssid) == 0 && strcmp(key, net.key) == 0)
+            if (strcmp(net.ip, ip) == 0 && strcmp(key, net.key) == 0)
             {
                 system("cls");
 
                 fflush(stdin);
 
-                printf("Enter BSSID.\n");
-                scanf("%s",&net.bssid);
+                printf("Enter IP.\n");
+                scanf("%s",&net.ip);
                 fflush(stdin);
 
                 printf("\nPress : \n\n1. To enter data in GBs. \n2. To enter data in MBs. \n3. To enter data in KBs. \n4. To enter data in Bytes. \n");
@@ -398,10 +393,6 @@ void manageNetwork()
                 scanf("%s",&net.encryption);
                 fflush(stdin);
 
-                printf("Enter authentication type.\n");
-                scanf("%s",&net.authentication);
-                fflush(stdin);
-
                 printf("Enter ESSID.\n");
                 scanf("%[^\n]",&net.essid);
                 fflush(stdin);
@@ -425,7 +416,7 @@ void manageNetwork()
             else if (flag == 1)
             {
                 system("cls");
-                printf("Unknown or invalid BSSID.\n");
+                printf("Unknown or invalid IP.\n");
             }
 
             printf("\n");
@@ -443,7 +434,7 @@ void connectToNetwork()
 
     FILE *f;
     struct Network net;
-    char BSSID[20];
+    char ip[20];
     char KEY[25];
     int connected = 0;
     long int Size = sizeof (net);
@@ -457,15 +448,15 @@ void connectToNetwork()
     }
     else
     {
-        printf("Enter BSSID.\n");
-        scanf("%[^\n]",&BSSID);
+        printf("Enter IP.\n");
+        scanf("%[^\n]",&ip);
 
         printf("Enter key.\n");
         scanf("%s",&KEY);
 
         while (fread(&net, sizeof(net), 1, f) == 1)
         {
-            if (strcmp(net.bssid, BSSID) == 0 && strcmp(KEY, net.key) == 0)
+            if (strcmp(net.ip, ip) == 0 && strcmp(KEY, net.key) == 0)
             {
                 system("cls");
                 fflush(stdin);
@@ -486,7 +477,7 @@ void connectToNetwork()
                 fflush(stdin);
 
                 system("cls");
-                printf("Unknown or invalid BSSID.\n");
+                printf("Unknown or invalid IP.\n");
             }
         }
     }
@@ -573,7 +564,7 @@ void connectedNetworkStatus()
             {
                 printf("Connection Status : \n\n\n");
                 printf("Connected to : %s.\n\n", net.essid);
-                printf("BSSID : %s.\n\n", net.bssid);
+                printf("IP : %s.\n\n", net.ip);
                 printf("CH : %d.\n\n", net.channel);
                 connected = 1;
                 break;
