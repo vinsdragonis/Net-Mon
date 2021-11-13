@@ -1,5 +1,5 @@
-#include "networkData.h"
-#include "connectedDevices.h"
+#include "headers/networkData.h"
+#include "headers/connectedDevices.h"
 
 #define esc 27
 
