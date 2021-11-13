@@ -100,7 +100,7 @@ void addNetwork()
     {
         system("cls");
 
-        printf("Enter IP.\n");
+        printf("Enter IP Address.\n");
         scanf("%s",&net.ip);
         fflush(stdin);
 
@@ -252,7 +252,7 @@ void searchNetwork()
     }
     else
     {
-        printf("Enter IP.\n");
+        printf("Enter IP Address.\n");
         scanf("%s",&ip);
 
         while (fread(&net, sizeof(net), 1, f) == 1)
@@ -308,7 +308,7 @@ void manageNetwork()
     }
     else
     {
-        printf("Enter IP.\n");
+        printf("Enter IP Address.\n");
         scanf("%[^\n]",&ip);
 
         printf("Enter key.\n");
@@ -448,7 +448,7 @@ void connectToNetwork()
     }
     else
     {
-        printf("Enter IP.\n");
+        printf("Enter IP Address.\n");
         scanf("%[^\n]",&ip);
 
         printf("Enter key.\n");
