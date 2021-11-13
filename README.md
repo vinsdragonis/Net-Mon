@@ -6,7 +6,10 @@
 **This application is only to *view the basic features of a network*, and learn to setup a minimal network in a virtual environment. *No real network is setup in the real world* using this.**
 
 ### To run:
-    ./a.out
+
+- Run **a.exe** or use the command below to run thru terminal.
+    
+      ./a.out
 
 ### Fields used:
 - IP Address (For example, 10.0.0.1)
